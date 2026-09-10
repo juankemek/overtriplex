@@ -12,14 +12,14 @@
 <helmet>
 <style>
   :root{
-    --bg: oklch(0.14 0.016 258);
-    --bg-1: oklch(0.178 0.02 258);
-    --bg-2: oklch(0.222 0.022 258);
+    --bg: oklch(0.152 0.03 152);
+    --bg-1: oklch(0.19 0.034 152);
+    --bg-2: oklch(0.234 0.036 152);
     --border: oklch(1 0 0 / 0.09);
     --border-2: oklch(1 0 0 / 0.16);
     --fg: oklch(0.97 0.008 95);
-    --fg-muted: oklch(0.74 0.02 258);
-    --fg-subtle: oklch(0.55 0.02 258);
+    --fg-muted: oklch(0.75 0.025 152);
+    --fg-subtle: oklch(0.58 0.026 152);
     --green: oklch(0.82 0.19 152);
     --green-fg: oklch(0.14 0.03 152);
     --green-dim: oklch(0.82 0.19 152 / 0.15);
@@ -40,12 +40,13 @@
     font-family:'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
     position:relative;
     background:
-      radial-gradient(1100px 560px at 82% -8%, oklch(0.82 0.19 152 / 0.14), transparent 60%),
-      radial-gradient(900px 520px at 8% 4%, oklch(0.68 0.2 27 / 0.09), transparent 60%),
-      radial-gradient(1000px 680px at 10% 40%, oklch(0.78 0.15 300 / 0.07), transparent 62%),
-      radial-gradient(1200px 720px at 92% 55%, oklch(0.82 0.19 152 / 0.10), transparent 60%),
-      radial-gradient(950px 620px at 14% 80%, oklch(0.68 0.2 27 / 0.08), transparent 60%),
-      radial-gradient(1000px 640px at 88% 98%, oklch(0.82 0.19 152 / 0.09), transparent 60%),
+      radial-gradient(1100px 560px at 82% -8%, oklch(0.82 0.19 152 / 0.20), transparent 60%),
+      radial-gradient(900px 520px at 8% 4%, oklch(0.68 0.2 27 / 0.08), transparent 60%),
+      radial-gradient(1000px 680px at 10% 40%, oklch(0.82 0.19 152 / 0.09), transparent 62%),
+      radial-gradient(1200px 720px at 92% 55%, oklch(0.82 0.19 152 / 0.14), transparent 60%),
+      radial-gradient(950px 620px at 14% 80%, oklch(0.68 0.2 27 / 0.07), transparent 60%),
+      radial-gradient(1000px 640px at 88% 98%, oklch(0.82 0.19 152 / 0.13), transparent 60%),
+      repeating-linear-gradient(115deg, oklch(1 0 0 / 0.02) 0px, oklch(1 0 0 / 0.02) 90px, transparent 90px, transparent 180px),
       var(--bg);
     min-height:100%;
     display:flex;
@@ -113,6 +114,9 @@
   /* hero */
   .hero{padding:88px 0 56px; position:relative; overflow:hidden;}
   .hero-curve{position:absolute; inset:auto 0 0 0; height:220px; opacity:0.4; pointer-events:none;}
+  .pitch-mark{position:absolute; top:0; right:0; width:640px; height:640px; max-width:60vw; z-index:0; pointer-events:none;}
+  .pitch-mark-bl{position:absolute; bottom:-140px; left:-140px; width:420px; height:420px; z-index:0; pointer-events:none;}
+  .hero .wrap{position:relative; z-index:1;}
   .kicker{
     display:inline-flex; align-items:center; gap:8px;
     font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.09em;
@@ -436,6 +440,16 @@
   <header class="hero">
     <svg class="hero-curve" viewBox="0 0 1180 220" preserveAspectRatio="none">
       <path d="M0 190 C 90 178, 140 150, 210 140 S 340 118, 400 108 S 500 150, 540 168 S 620 96, 700 78 S 820 40, 900 30 S 1080 8, 1180 4" fill="none" stroke="oklch(0.82 0.19 152)" stroke-width="2"/>
+    </svg>
+    <svg class="pitch-mark" viewBox="0 0 640 640" preserveAspectRatio="xMaxYMin meet" aria-hidden="true">
+      <line x1="0" y1="110" x2="640" y2="110" stroke="oklch(1 0 0 / 0.07)" stroke-width="2"/>
+      <circle cx="470" cy="110" r="130" fill="none" stroke="oklch(1 0 0 / 0.07)" stroke-width="2"/>
+      <circle cx="470" cy="110" r="4" fill="oklch(1 0 0 / 0.1)"/>
+      <path d="M576 0 A 64 64 0 0 1 640 64" fill="none" stroke="oklch(1 0 0 / 0.07)" stroke-width="2"/>
+    </svg>
+    <svg class="pitch-mark-bl" viewBox="0 0 420 420" preserveAspectRatio="xMinYMax meet" aria-hidden="true">
+      <path d="M0 320 A 100 100 0 0 0 100 420" fill="none" stroke="oklch(0.82 0.19 152 / 0.1)" stroke-width="2"/>
+      <path d="M0 260 A 160 160 0 0 0 160 420" fill="none" stroke="oklch(0.82 0.19 152 / 0.06)" stroke-width="2"/>
     </svg>
     <div class="wrap">
       <div class="kicker"><span class="dot"></span>SINAIS AO VIVO NO TELEGRAM</div>
