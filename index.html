@@ -88,7 +88,14 @@
     border-bottom:1px solid var(--border);
   }
   .nav-row{display:flex; align-items:center; justify-content:space-between; height:76px;}
-  .brand{display:flex; align-items:center; gap:10px;}
+  #planos{scroll-margin-top:92px;}
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    background:none; border:none; padding:4px; margin:-4px;
+    font-family:inherit; color:inherit; cursor:pointer; border-radius:8px;
+    transition:opacity 0.15s ease;
+  }
+  .brand:hover{opacity:0.8;}
   .brand-mark{width:30px; height:30px; border-radius:8px; background:var(--green-dim); border:1px solid var(--green-border); display:flex; align-items:center; justify-content:center; color:var(--green);}
   .brand-name{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:16px; letter-spacing:0.02em;}
   .nav-actions{display:flex; align-items:center; gap:10px;}
@@ -421,12 +428,12 @@
 
   <div class="nav">
     <div class="wrap nav-row">
-      <div class="brand">
+      <button type="button" id="brand-home" class="brand" aria-label="Voltar para a página inicial">
         <div class="brand-mark">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 15L10 9L14 13L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 6H20V11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <div class="brand-name">OVER TRIPLEX</div>
-      </div>
+      </button>
       <div class="nav-actions">
         <button type="button" id="nav-view-entradas" class="nav-ghost">Ver entradas</button>
         <a class="nav-cta" href="#planos">
@@ -878,6 +885,35 @@
   }
   if(navEntradas){ navEntradas.addEventListener('click', showEntradas); }
   if(backLink){ backLink.addEventListener('click', showLanding); }
+
+  var brandHome = document.getElementById('brand-home');
+  if(brandHome){
+    brandHome.addEventListener('click', function(){
+      if(viewEntradas.style.display !== 'none'){ showLanding(); }
+      else{ window.scrollTo(0,0); }
+    });
+  }
+
+  /* Links "Ver planos" (#planos) podem ser clicados a partir da aba "Ver entradas",
+     onde #planos fica dentro de #view-landing (display:none). Troca pra landing
+     primeiro, depois rola suave até a seção — em vez de depender do scroll nativo
+     de âncora, que não alcança um alvo escondido. */
+  var planosLinks = document.querySelectorAll('a[href="#planos"]');
+  planosLinks.forEach(function(link){
+    link.addEventListener('click', function(e){
+      e.preventDefault();
+      var target = document.getElementById('planos');
+      if(!target) return;
+      if(viewEntradas.style.display !== 'none'){
+        showLanding();
+        requestAnimationFrame(function(){
+          target.scrollIntoView({behavior:'smooth', block:'start'});
+        });
+      } else {
+        target.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    });
+  });
 
   /* Simulador de stake: soma de todos os retornos % reais aplicada à stake informada */
   var SUM_PCT = 42932.3300;
